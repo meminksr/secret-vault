@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Mesajı Görüntüle - Secret Vault</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background: #1a1a1a; color: white; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .container { background: #2a2a2a; padding: 2.5rem; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); width: 450px; text-align: center; }
+        .message-box { background: #111; border-left: 4px solid #007bff; padding: 20px; text-align: left; margin-top: 1.5rem; min-height: 50px; white-space: pre-wrap; }
+        .warning { color: #ff4444; font-size: 14px; margin-top: 20px; font-style: italic; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>🔑 Gizli Mesaj</h2>
+    <div id="status">Mesaj yükleniyor...</div>
+    <div id="messageDisplay" class="message-box" style="display: none;"></div>
+    <p class="warning">⚠️ Dikkat: Bu mesaj süresi dolduğunda otomatik olarak silinecektir.</p>
+</div>
+
+<script>
+    async function loadMessage() {
+        // Linkteki ID'yi alıyoruz (?id=xxxx)
+        const urlParams = new URLSearchParams(window.location.search);
+        const messageId = urlParams.get('id');
+
+        if (!messageId) {
+            document.getElementById('status').innerText = "Geçersiz Link!";
+            return;
+        }
+
+        try {
+            // Java API'mizden mesajı istiyoruz
+            const response = await fetch('/api/messages/' + messageId);
+
+            if (response.status === 200) {
+                const data = await response.json();
+                document.getElementById('status').style.display = "none";
+                document.getElementById('messageDisplay').innerText = data.encryptedContent;
+                document.getElementById('messageDisplay').style.display = "block";
+            } else {
+                document.getElementById('status').innerText = "❌ Mesaj bulunamadı veya süresi dolmuş!";
+            }
+        } catch (error) {
+            document.getElementById('status').innerText = "Sistem hatası oluştu.";
+        }
+    }
+
+    // Sayfa açıldığında fonksiyonu çalıştır
+    loadMessage();
+</script>
+
+</body>
+</html>

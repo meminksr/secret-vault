@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Secret Vault - Gizli Mesaj</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background: #1a1a1a; color: white; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .container { background: #2a2a2a; padding: 2rem; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); width: 400px; text-align: center; }
+        textarea { width: 100%; height: 150px; border-radius: 8px; border: none; padding: 10px; margin-bottom: 1rem; background: #333; color: white; resize: none; box-sizing: border-box; }
+        button { background: #007bff; color: white; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer; width: 100%; font-size: 16px; transition: 0.3s; }
+        button:hover { background: #0056b3; }
+        #linkContainer { margin-top: 1.5rem; display: none; background: #111; padding: 10px; border-radius: 5px; word-break: break-all; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>🔒 Secret Vault</h2>
+    <p>Mesajını yaz ve gizli link oluştur.</p>
+    <textarea id="messageInput" placeholder="Sırrını buraya yaz..."></textarea>
+    <button onclick="createLink()">Gizli Link Oluştur</button>
+
+    <div id="linkContainer">
+        <p>Gizli Linkin:</p>
+        <strong id="generatedLink"></strong>
+    </div>
+</div>
+
+<script>
+    async function createLink() {
+        const content = document.getElementById('messageInput').value;
+        if (!content) return alert("Boş mesaj gönderilemez!");
+
+        // Senin yazdığın Java API'sine istek atıyoruz
+        const response = await fetch('/api/messages', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ encryptedContent: content })
+        });
+
+        const data = await response.json();
+
+        // Gelen ID ile linki oluşturup ekranda gösteriyoruz
+        const link = window.location.origin + "/view.html?id=" + data.id;
+        document.getElementById('generatedLink').innerText = link;
+        document.getElementById('linkContainer').style.display = 'block';
+    }
+</script>
+
+</body>
+</html>

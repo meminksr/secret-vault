@@ -1,0 +1,14 @@
+# IDE ve Sistem dosyaları
+.idea/
+*.iml
+.DS_Store
+help/
+
+# Derleme çıktıları
+target/
+out/
+
+# Veritabanı ve Maven dosyaları
+.mvn/
+mvnw
+mvnw.cmd
