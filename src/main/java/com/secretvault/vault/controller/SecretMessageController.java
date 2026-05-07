@@ -5,6 +5,8 @@ import com.secretvault.vault.service.SecretMessageService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 @RestController
 @RequestMapping("/api/messages")
 @CrossOrigin(origins = "*")
@@ -24,7 +26,7 @@ public class SecretMessageController {
 
     @GetMapping("/{id}")
     public ResponseEntity<SecretMessage> readMessage(@PathVariable String id) {
-        return service.getMessageById(id)
+        return service.getMessage(UUID.fromString(id))
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }

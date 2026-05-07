@@ -18,17 +18,9 @@ public class CleanupService {
     // Her 60 saniyede bir (60000 ms) çalışır
     @Scheduled(fixedRate = 60000)
     @Transactional
-    public void deleteExpiredMessages() {
-        System.out.println("The trash-collecting robot is at work: It's scanning expired messages...");
-
-        // Veritabanındaki tüm mesajları çekip kontrol edebiliriz
-        // veya Repository'e özel bir silme metodu yazabiliriz.
-        // Şimdilik en basit mantık:
-        repository.findAll().forEach(msg -> {
-            if (msg.getExpiresAt() != null && msg.getExpiresAt().isBefore(LocalDateTime.now())) {
-                repository.delete(msg);
-                System.out.println("Destroyed: " + msg.getId());
-            }
-        });
+    public void cleanupExpiredMessages() {
+        LocalDateTime now = LocalDateTime.now();
+        repository.deleteByExpiresAtBefore(now);
+        System.out.println("Temizlik yapıldı: Süresi dolan mesajlar silindi.");
     }
 }
