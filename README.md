@@ -35,8 +35,8 @@ src/main/java/com/secretvault/vault/
 2.  `src/main/resources/application.properties` dosyasındaki veritabanı bağlantı bilgilerini güncelleyin:
     ```properties
     spring.datasource.url=jdbc:sqlserver://localhost:1433;databaseName=SecretVault;encrypt=true;trustServerCertificate=true
-    spring.datasource.username=sa
-    spring.datasource.password=SeninSifren
+    spring.datasource.username=${DB_USERNAME}
+spring.datasource.password=${DB_PASSWORD}
     ```
 3.  Maven bağımlılıklarını yükleyin: `mvn clean install`
 4.  Uygulamayı çalıştırın: `mvn spring-boot:run`
