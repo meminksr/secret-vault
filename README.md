@@ -29,7 +29,7 @@ src/main/java/com/secretvault/vault/
 └── util/           # Şifreleme yardımcı sınıfı (AesUtil)
 ```
 
-## ⚙️ Kurulum
+## ⚙️ Kurulum Adımları
 
 1.  Projeyi klonlayın: `git clone https://github.com/kullaniciadi/secret-vault.git`
 2.  `src/main/resources/application.properties` dosyasındaki veritabanı bağlantı bilgilerini güncelleyin:
