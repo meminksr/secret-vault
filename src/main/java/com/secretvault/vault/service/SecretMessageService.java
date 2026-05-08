@@ -24,7 +24,7 @@ public class SecretMessageService {
         message.setEncryptedContent(encrypted);
 
         message.setCreatedAt(LocalDateTime.now());
-        message.setExpiresAt(LocalDateTime.now().plusMinutes(1));
+        message.setExpiresAt(LocalDateTime.now().plusMinutes(2)); // Mesaj 2 dakika sonra silinecek
         return repository.save(message);
     }
 
