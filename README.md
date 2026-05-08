@@ -48,3 +48,16 @@ src/main/java/com/secretvault/vault/
 | `POST` | `/api/messages` | Yeni bir gizli mesaj oluşturur (Şifrelenerek kaydedilir). |
 | `GET` | `/api/messages/{id}` | Belirtilen ID'ye sahip mesajın şifresini çözer ve getirir. |
 
+## 🚀 Canlı Uygulama
+Uygulama şu an **Render** üzerinde aktif olarak çalışmaktadır.
+- **Canlı Swagger UI:** https://secret-vault-api-nqfb.onrender.com/swagger-ui/index.html
+
+## 📖 API Kullanımı
+
+### 1. Mesaj Şifreleme ve Kaydetme
+- **Endpoint:** `POST /api/messages`
+- **İstek:**
+```json
+{
+  "encryptedContent": "Gizli Mesaj İçeriği"
+}
