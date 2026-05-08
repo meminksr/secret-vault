@@ -8,7 +8,7 @@ public class AesUtil {
 
     // Bu senin gizli anahtarın. Gerçek projelerde bu "environment variable" olarak saklanır.
     // Tam 16 karakter olmalıdır (128-bit AES için).
-    private static final String SECRET_KEY = "12345678910111213141516";
+    private static final String SECRET_KEY = "mySuperSecretKey";
 
     public static String encrypt(String strToEncrypt) {
         try {
