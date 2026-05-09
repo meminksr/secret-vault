@@ -3,20 +3,20 @@ package com.secretvault.vault.entity;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.UUID;
-
+import jakarta.validation.constraints.NotBlank;
 @Entity
 @Table(name = "secret_messages") // Veritabanındaki tablonun adı bu olacak
 public class SecretMessage {
 
     @Id // Bu sütunun Primary Key (Birincil Anahtar) olduğunu belirtir
     private String id = UUID.randomUUID().toString(); // Mesajlara 1,2,3 yerine karmaşık bir ID vereceğiz
-
+    @NotBlank(message = "The message cannot be left blank!")
     @Column(nullable = false, length = 5000) // Boş olamaz ve uzun bir metin alabilir
-    private String encryptedContent; // Şifrelenmiş anlamsız metnimiz buraya gelecek
+    private String encryptedContent; // Şifrelenmiş anlamsız metnin buraya gelecek
 
     private LocalDateTime createdAt = LocalDateTime.now(); // Oluşturulma tarihi
 
-    private LocalDateTime expiresAt; // Silinme tarihi (TTL için kullanacağız)
+    private LocalDateTime expiresAt; // Silinme tarihi
 
     // --- GETTER VE SETTER METOTLARI ---
 

@@ -1,11 +1,10 @@
 package com.secretvault.vault.controller;
 import com.secretvault.vault.entity.SecretMessage;
 import com.secretvault.vault.service.SecretMessageService;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.UUID;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/messages")
@@ -19,7 +18,7 @@ public class SecretMessageController {
     }
 
     @PostMapping
-    public ResponseEntity<SecretMessage> createMessage(@RequestBody SecretMessage message) {
+    public ResponseEntity<SecretMessage> createMessage(@Valid @RequestBody SecretMessage message) {
         SecretMessage savedMessage = service.saveMessage(message);
         return ResponseEntity.ok(savedMessage);
     }

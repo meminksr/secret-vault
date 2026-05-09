@@ -8,9 +8,13 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.UUID;
+import jakarta.validation.constraints.NotBlank;
 
 @Service
 public class SecretMessageService {
+
+    @NotBlank(message = "The message cannot be left blank!")
+    private String encryptedContent;
 
     private final SecretMessageRepository repository;
 

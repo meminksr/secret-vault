@@ -21,6 +21,6 @@ public class CleanupService {
     public void cleanupExpiredMessages() {
         LocalDateTime now = LocalDateTime.now();
         repository.deleteByExpiresAtBefore(now);
-        System.out.println("Temizlik yapıldı: Süresi dolan mesajlar silindi.");
+        System.out.println("Cleanup completed: Expired messages have been deleted.");
     }
 }
