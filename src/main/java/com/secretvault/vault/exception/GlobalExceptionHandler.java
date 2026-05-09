@@ -22,7 +22,7 @@ public class GlobalExceptionHandler {
 
         // Entity'de @NotBlank içine yazdığımız o özel mesajı cımbızla çekiyoruz
         String errorMessage = ex.getBindingResult().getAllErrors().get(0).getDefaultMessage();
-        errorResponse.put("mesaj", errorMessage);
+        errorResponse.put("message", errorMessage);
 
         return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
     }
